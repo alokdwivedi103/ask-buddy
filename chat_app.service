@@ -1,0 +1,18 @@
+[Unit]
+Description=Reflect therapist AI API
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/ai-therapist
+EnvironmentFile=/opt/ai-therapist/.env
+ExecStart=/opt/ai-therapist/.venv/bin/uvicorn app:app --host 0.0.0.0 --port 8000 --workers 1
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
